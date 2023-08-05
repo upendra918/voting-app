@@ -25,5 +25,9 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/result/Dockerfile'
-        tags: |
-          $(tag)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(agent.builddirectory)'
+        Contents: '**/*.war/jar'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+        CleanTargetFolder: true
